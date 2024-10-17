@@ -1,6 +1,11 @@
 use std::fmt;
 use std::error::Error;
 use std::fmt::{Debug, Formatter};
+use axum::http::StatusCode;
+use axum::Json;
+use axum::response::{IntoResponse, Response};
+use serde_json::json;
+use crate::core::errors::auth_errors::AuthError;
 
 pub enum AppError {
     IoError(std::io::Error),    // Standard IO error

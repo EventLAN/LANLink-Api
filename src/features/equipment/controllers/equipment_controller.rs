@@ -6,7 +6,7 @@ use axum::routing::get;
 use deadpool_diesel::postgres::Pool;
 use serde::Serialize;
 use uuid::{Uuid};
-use crate::features::equipment::dto::equipment_dto::EquipmentDto;
+use crate::features::equipment::dtos::equipment_dto::EquipmentDto;
 use crate::features::equipment::repos::equipment_repo::*;
 
 pub fn router() -> Router<Pool> {
@@ -19,7 +19,7 @@ pub fn router() -> Router<Pool> {
 
 #[axum::debug_handler]
 async fn get_all_equipment_handler(State(_pool): State<Pool>) -> impl IntoResponse {
-    let equipment_models = get_all_equipment(_pool);
+    let equipment_models = get_all_equipment(&_pool);
 
     match equipment_models.await {
         Some(vec) => {
@@ -33,7 +33,7 @@ async fn get_all_equipment_handler(State(_pool): State<Pool>) -> impl IntoRespon
 #[axum::debug_handler]
 async fn get_equipment_handler(
     State(_pool): State<Pool>, Path(public_id): Path<Uuid>) -> impl IntoResponse {
-    let equipment_model = get_equipment_by_public_id(_pool, public_id);
+    let equipment_model = get_equipment_by_public_id(&_pool, public_id);
 
     match equipment_model.await {
         Some(item) => {

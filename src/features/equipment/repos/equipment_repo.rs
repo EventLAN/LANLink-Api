@@ -12,7 +12,7 @@ use crate::features::equipment::models::equipment_model::EquipmentModel;
 use crate::schema::equipments::dsl::*;
 
 pub async fn get_all_equipment(
-    pool: Pool,
+    pool: &Pool,
 ) -> Option<Vec<EquipmentModel>> {
     let conn = match create_connection(pool).await {
         Some(conn) => conn,
@@ -39,7 +39,7 @@ pub async fn get_all_equipment(
 }
 
 pub async fn get_equipment_by_id(
-    pool: Pool,
+    pool: &Pool,
     request_id: i32,
 ) -> Option<EquipmentModel> {
     let conn = match create_connection(pool).await {
@@ -68,7 +68,7 @@ pub async fn get_equipment_by_id(
 }
 
 pub async fn get_equipment_by_public_id(
-    pool: Pool,
+    pool: &Pool,
     public_id: Uuid,
 ) -> Option<EquipmentModel> {
     let conn = match create_connection(pool).await {

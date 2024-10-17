@@ -44,7 +44,7 @@ use crate::core::errors::error_handler::throw_error;
 ///
 /// This function is useful for handling connection errors gracefully in asynchronous
 /// contexts where obtaining a database connection may fail, but the program should not panic.
-pub async fn create_connection(pool: Pool) -> Option<Object> {
+pub async fn create_connection(pool: &Pool) -> Option<Object> {
     match pool.get().await {
         Ok(conn) => Some(conn),
         Err(e) => {

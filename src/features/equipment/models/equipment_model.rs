@@ -1,6 +1,6 @@
 use diesel::prelude::*;
 use uuid::Uuid;
-use crate::features::equipment::dto::equipment_dto::EquipmentDto;
+use crate::features::equipment::dtos::equipment_dto::EquipmentDto;
 
 #[derive(Queryable, Selectable)]
 #[diesel(table_name = crate::schema::equipments)]

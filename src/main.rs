@@ -8,8 +8,11 @@ mod features;
 mod schema;
 mod core;
 
-use crate::features::greeting::greeting_controller;
-use crate::features::equipment::controllers::equipment_controller;
+use features::auth::controllers::auth_controller;
+use features::protected::protected_controller;
+use features::sign_up::controllers::sign_up_controller;
+use features::user::controllers::user_controller;
+use features::equipment::controllers::equipment_controller;
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations/");
 
@@ -20,8 +23,11 @@ async fn main() {
     run_migrations(&db_pool).await;
 
     let app = Router::new()
-        .merge(greeting_controller::router())
+        .merge(auth_controller::router())
+        .merge(protected_controller::router())
+        .merge(sign_up_controller::router())
         .merge(equipment_controller::router())
+        .merge(user_controller::router())
         .with_state(db_pool);
 
 
